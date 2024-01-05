@@ -2,7 +2,7 @@ import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 // import { HttpExceptionFilter } from "./exeption/http.exeption";
-import { AllExceptionsFilter } from "./exeption/all.exeptions";
+import { AllExceptionsFilter } from "./exeption/all.exсeption";
 // import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 const start = async () => {

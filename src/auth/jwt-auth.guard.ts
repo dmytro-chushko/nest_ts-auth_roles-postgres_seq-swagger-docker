@@ -8,7 +8,7 @@ import {
 import { JwtService } from "@nestjs/jwt";
 import { Request } from "express";
 import { Observable } from "rxjs";
-import { HttpExceptionFilter } from "src/exeption/http.exeption";
+import { HttpExceptionFilter } from "src/exeption/http.exсeption";
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
