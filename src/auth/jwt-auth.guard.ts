@@ -3,18 +3,18 @@ import {
   ExecutionContext,
   Injectable,
   UnauthorizedException,
-  UseFilters,
+  // UseFilters,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { Request } from "express";
 import { Observable } from "rxjs";
-import { HttpExceptionFilter } from "src/exeption/http.exсeption";
+// import { HttpExceptionFilter } from "src/exeption/http.exсeption";
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
-  @UseFilters(HttpExceptionFilter)
+  // @UseFilters(HttpExceptionFilter)
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
