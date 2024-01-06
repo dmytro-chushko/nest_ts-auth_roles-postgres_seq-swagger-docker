@@ -1,9 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 
 import { User } from "./users.model";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { RolesService } from "src/roles/roles.service";
+import { AddRoleDto } from "./dto/add-role.dto";
+import { BanUserDto } from "./dto/ban-user-dto";
 
 @Injectable()
 export class UsersService {
@@ -35,5 +37,34 @@ export class UsersService {
     });
 
     return user;
+  }
+
+  async addRole(dto: AddRoleDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    if (!user) {
+      throw new NotFoundException(`User with id ${dto.userId} Not found`);
+    }
+
+    const role = await this.roleService.getRoleByValue(dto.value);
+    if (!role) {
+      throw new NotFoundException(`Role ${dto.value} not found`);
+    }
+
+    await user.$add("role", role.id);
+
+    return dto;
+  }
+
+  async ban(dto: BanUserDto) {
+    const user = await this.userRepository.findByPk(dto.userId);
+    if (!user) {
+      throw new NotFoundException(`User with id ${dto.userId} Not found`);
+    }
+
+    user.banned = true;
+    user.banReason = dto.banReason;
+    await user.save();
+
+    return dto;
   }
 }

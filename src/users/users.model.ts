@@ -47,7 +47,7 @@ export class User extends Model<User, UserCreationAttrs> {
     example: "For violation of rules",
     description: "The ban reason",
   })
-  @Column({ type: DataType.BOOLEAN, defaultValue: false })
+  @Column({ type: DataType.STRING, defaultValue: false })
   banReason: string;
 
   @BelongsToMany(() => Role, () => UserRoles)
