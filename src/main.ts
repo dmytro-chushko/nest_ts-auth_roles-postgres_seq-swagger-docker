@@ -3,6 +3,7 @@ import { AppModule } from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 // import { HttpExceptionFilter } from "./exeption/http.exeption";
 import { AllExceptionsFilter } from "./exeption/all.exсeption";
+import { ValidationPipe } from "./pipe/validation.pipe";
 // import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 const start = async () => {
@@ -22,6 +23,7 @@ const start = async () => {
   // app.useGlobalFilters(new HttpExceptionFilter());
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter({ httpAdapter }));
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 };
